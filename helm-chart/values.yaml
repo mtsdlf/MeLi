@@ -1,0 +1,9 @@
+replicaCount: 1
+image:
+  repository: your-docker-registry/your-python-app
+  tag: latest
+  pullPolicy: IfNotPresent
+service:
+  name: my-python-app
+  type: ClusterIP
+  port: 5000
