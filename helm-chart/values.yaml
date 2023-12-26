@@ -1,9 +1,9 @@
 replicaCount: 1
 image:
-  repository: your-docker-registry/your-python-app
+  repository: docker.hub/mtsdlf/disk-app
   tag: latest
   pullPolicy: IfNotPresent
 service:
-  name: my-python-app
+  name: disk-app
   type: ClusterIP
   port: 5000

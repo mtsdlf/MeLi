@@ -1,18 +1,18 @@
 2apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "my-python-app.fullname" . }}
+  name: {{ include "disk-app.fullname" . }}
   labels:
-    app: {{ include "my-python-app.name" . }}
+    app: {{ include "disk-app.name" . }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ include "my-python-app.name" . }}
+      app: {{ include "disk-app.name" . }}
   template:
     metadata:
       labels:
-        app: {{ include "my-python-app.name" . }}
+        app: {{ include "disk-app.name" . }}
     spec:
       containers:
       - name: {{ .Chart.Name }}

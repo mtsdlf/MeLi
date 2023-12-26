@@ -4,7 +4,7 @@ metadata:
   name: {{ .Values.service.name }}
 spec:
   selector:
-    app: {{ include "my-python-app.name" . }}
+    app: {{ include "disk-app.name" . }}
   ports:
     - protocol: TCP
       port: {{ .Values.service.port }}
