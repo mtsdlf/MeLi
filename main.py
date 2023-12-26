@@ -12,6 +12,19 @@ class DiskUsageHandler(BaseHTTPRequestHandler):
 
             storage_list = self.get_storage_list()
             self.wfile.write(json.dumps(storage_list).encode('utf-8'))
+        elif self.path == '/run_script':
+            # Agrega aquí la lógica para ejecutar tu script local
+            self.send_response(200)
+            self.send_header('Content-type', 'text/plain')
+            self.end_headers()
+
+            try:
+                # Ejemplo de ejecución de un script local en el mismo directorio
+                script_output = subprocess.check_output(['bash', 'script.bash'], text=True)
+                self.wfile.write(f'Script Output: {script_output}'.encode('utf-8'))
+            except subprocess.CalledProcessError as e:
+                self.wfile.write(f'Error running script: {str(e)}'.encode('utf-8'))
+
         elif self.path.startswith('/'):
             device_name = self.path[1:]
             usage_percentage = self.get_disk_usage(device_name)
@@ -26,18 +39,6 @@ class DiskUsageHandler(BaseHTTPRequestHandler):
                 self.send_header('Content-type', 'text/plain')
                 self.end_headers()
                 self.wfile.write(f'Device {device_name} not found'.encode('utf-8'))
-        elif self.path == '/run_script':
-            # Agrega aquí la lógica para ejecutar tu script local
-            self.send_response(200)
-            self.send_header('Content-type', 'text/plain')
-            self.end_headers()
-
-            try:
-                # Ejemplo de ejecución de un script local en el mismo directorio
-                script_output = subprocess.check_output(['bash', 'script.py'], text=True)
-                self.wfile.write(f'Script Output: {script_output}'.encode('utf-8'))
-            except subprocess.CalledProcessError as e:
-                self.wfile.write(f'Error running script: {str(e)}'.encode('utf-8'))
 
         
         else:
