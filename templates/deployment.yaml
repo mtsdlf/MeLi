@@ -1,18 +1,18 @@
-2apiVersion: apps/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "disk-app.fullname" . }}
+  name: {{ include "disk-app-chart.fullname" . }}
   labels:
-    app: {{ include "disk-app.name" . }}
+    app: {{ include "disk-app-chart.name" . }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ include "disk-app.name" . }}
+      app: {{ include "disk-app-chart.name" . }}
   template:
     metadata:
       labels:
-        app: {{ include "disk-app.name" . }}
+        app: {{ include "disk-app-chart.name" . }}
     spec:
       containers:
       - name: {{ .Chart.Name }}
